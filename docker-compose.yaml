@@ -1,0 +1,29 @@
+services:
+  
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend
+    
+  
+  backend:
+    image: locacaobike
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_URL: jdbc:mysql://db:3306/LocacaoBike?createDatabaseIfNotExist=true
+    depends_on:
+      - db
+
+networks: 
+  backend:
+volumes:
+  mysql-data:
