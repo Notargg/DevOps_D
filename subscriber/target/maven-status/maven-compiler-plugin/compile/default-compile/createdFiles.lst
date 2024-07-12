@@ -1,0 +1,5 @@
+br/ufscar/dc/dsw/Subscriber.class
+br/ufscar/dc/dsw/config/RabbitMQConfig.class
+br/ufscar/dc/dsw/listener/RabbitMQListener.class
+br/ufscar/dc/dsw/model/Message.class
+br/ufscar/dc/dsw/service/EmailService.class

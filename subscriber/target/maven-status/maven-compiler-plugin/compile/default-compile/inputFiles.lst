@@ -1,0 +1,5 @@
+/home/notarg/Documentos/GitHub/DevOps_D/subscriber/src/main/java/br/ufscar/dc/dsw/model/Message.java
+/home/notarg/Documentos/GitHub/DevOps_D/subscriber/src/main/java/br/ufscar/dc/dsw/Subscriber.java
+/home/notarg/Documentos/GitHub/DevOps_D/subscriber/src/main/java/br/ufscar/dc/dsw/service/EmailService.java
+/home/notarg/Documentos/GitHub/DevOps_D/subscriber/src/main/java/br/ufscar/dc/dsw/config/RabbitMQConfig.java
+/home/notarg/Documentos/GitHub/DevOps_D/subscriber/src/main/java/br/ufscar/dc/dsw/listener/RabbitMQListener.java

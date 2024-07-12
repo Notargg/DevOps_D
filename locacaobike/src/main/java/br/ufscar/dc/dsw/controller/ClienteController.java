@@ -24,6 +24,9 @@ import br.ufscar.dc.dsw.domain.Locacao;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.ILocacaoService;
 
+import br.ufscar.dc.dsw.model.Message;
+import br.ufscar.dc.dsw.service.RabbitMQSender;
+
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -36,6 +39,9 @@ public class ClienteController {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+
+	@Autowired
+	RabbitMQSender rabbitMQSender;
 
 
 	@GetMapping("/cadastrar")
@@ -60,6 +66,18 @@ public class ClienteController {
 		if(cliente.getPapel().equals("Cliente") || cliente.getPapel().equals("Admin"))
             cliente.setPapel("ROLE_" + cliente.getPapel());
 		clienteService.salvar(cliente);
+
+		Message msg = new Message();
+		msg.setToName(cliente.getNome());
+		msg.setToAddress(cliente.getEmail());
+		msg.setFromName("Virtual Lease");
+		msg.setFromAddress("virtuallease@gmail.com");
+		msg.setSubject("Salvamento com sucesso!");
+		msg.setBody("Parabéns, seu cadastro foi salvo com sucesso!");
+		
+		rabbitMQSender.send(msg);
+
+
 		attr.addFlashAttribute("sucess", "Cliente inserido com sucesso");
 		return "redirect:/clientes/listar";
 	}

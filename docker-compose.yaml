@@ -8,22 +8,37 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - backend
-    
+  
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    container_name: rabbitmq
+    networks:
+      - email
+    ports:
+      - "5672:5672"
+      - "15672:15672"
   
   backend:
     image: locacaobike
+    restart: always
+    env_file:
+      - .env
     ports:
       - "8080:8080"
     networks:
       - backend
+      - email
     environment:
       MYSQL_USER: root
       MYSQL_PASSWORD: password
       MYSQL_URL: jdbc:mysql://db:3306/LocacaoBike?createDatabaseIfNotExist=true
     depends_on:
       - db
+      - rabbitmq
 
 networks: 
   backend:
+  email:
 volumes:
   mysql-data:
