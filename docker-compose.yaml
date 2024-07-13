@@ -15,13 +15,11 @@ services:
     container_name: rabbitmq
     networks:
       - email
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-  
+
   backend:
     image: locacaobike
     restart: always
+    container_name: locacaobike
     env_file:
       - .env
     ports:
@@ -29,13 +27,21 @@ services:
     networks:
       - backend
       - email
-    environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      MYSQL_URL: jdbc:mysql://db:3306/LocacaoBike?createDatabaseIfNotExist=true
     depends_on:
       - db
       - rabbitmq
+
+  subscriber:
+    build: ./subscriber
+    restart: always
+    container_name: subscriber
+    env_file:
+      - .env
+      - ./subscriber/.env
+    networks:
+      - email
+    depends_on:
+      - backend
 
 networks: 
   backend:

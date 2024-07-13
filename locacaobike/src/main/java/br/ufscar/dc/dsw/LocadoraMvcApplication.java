@@ -105,13 +105,13 @@ public class LocadoraMvcApplication {
             Locacao lo1 = new Locacao();
             lo1.setCliente(c1);
             lo1.setLocadora(l1);
-            lo1.setDataHora("2023-08-02T14:00");
+            lo1.setDataHora("2024-11-11T14:00");
             locacaoDAO.save(lo1);
 
             Locacao lo2 = new Locacao();
             lo2.setCliente(c1);
             lo2.setLocadora(l1);
-            lo2.setDataHora("2023-08-04T16:00");
+            lo2.setDataHora("2024-10-10T16:00");
             locacaoDAO.save(lo2);
 
             List<Locadora> locadora = locadoraDAO.findAll();

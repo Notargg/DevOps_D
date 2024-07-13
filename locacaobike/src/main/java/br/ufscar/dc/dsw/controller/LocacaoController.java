@@ -36,6 +36,9 @@ import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.ILocadoraService;
 
+import br.ufscar.dc.dsw.model.Message;
+import br.ufscar.dc.dsw.service.RabbitMQSender;
+
 @Controller
 @RequestMapping("/locacoes")
 public class LocacaoController {
@@ -57,6 +60,9 @@ public class LocacaoController {
 
 	@Autowired
 	private IUsuarioService usuarioService;
+
+	@Autowired
+	RabbitMQSender rabbitMQSender;
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Locacao locacao, ModelMap model, @AuthenticationPrincipal Usuario usuario) {
@@ -118,6 +124,18 @@ public class LocacaoController {
 			return "locacao/cadastro";
 		}
 		locacaoService.salvar(locacao);
+
+		Message msg = new Message();
+		msg.setToName(locacao.getCliente().getNome() + "/" + locacao.getLocadora().getNome());
+		msg.setToAddress("ggraton7@gmail.com");
+		msg.setFromName("Virtual Lease");
+		msg.setFromAddress("deswebteste@gmail.com");
+		msg.setSubject("Salvamento com sucesso!");
+		msg.setBody("Parabéns, a sua Locação foi salva com sucesso!");
+		
+		rabbitMQSender.send(msg);
+
+
 		attr.addFlashAttribute("sucess", "Locação inserida com sucesso");
 		return "redirect:/locacoes/listar";
 	}

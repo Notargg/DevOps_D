@@ -24,6 +24,9 @@ import br.ufscar.dc.dsw.domain.Locacao;
 import br.ufscar.dc.dsw.service.spec.ILocadoraService;
 import br.ufscar.dc.dsw.service.spec.ILocacaoService;
 
+import br.ufscar.dc.dsw.model.Message;
+import br.ufscar.dc.dsw.service.RabbitMQSender;
+
 @Controller
 @RequestMapping("/locadoras")
 public class LocadoraController {
@@ -36,6 +39,9 @@ public class LocadoraController {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+
+	@Autowired
+	RabbitMQSender rabbitMQSender;
 	
 
 	@GetMapping("/cadastrar")
@@ -73,6 +79,17 @@ public class LocadoraController {
 		System.out.println(locadora.getPapel());
 		
 		locadoraService.salvar(locadora);
+
+		Message msg = new Message();
+		msg.setToName(locadora.getNome());
+		msg.setToAddress("ggraton7@gmail.com");
+		msg.setFromName("Virtual Lease");
+		msg.setFromAddress("deswebteste@gmail.com");
+		msg.setSubject("Salvamento com sucesso!");
+		msg.setBody("Parabéns, seu cadastro de locadora foi salvo com sucesso!");
+		
+		rabbitMQSender.send(msg);
+
 		attr.addFlashAttribute("sucess", "Locadora inserida com sucesso");
 		return "redirect:/locadoras/listar";
 	}

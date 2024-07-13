@@ -69,11 +69,11 @@ public class ClienteController {
 
 		Message msg = new Message();
 		msg.setToName(cliente.getNome());
-		msg.setToAddress(cliente.getEmail());
+		msg.setToAddress("ggraton7@gmail.com");
 		msg.setFromName("Virtual Lease");
-		msg.setFromAddress("virtuallease@gmail.com");
+		msg.setFromAddress("deswebteste@gmail.com");
 		msg.setSubject("Salvamento com sucesso!");
-		msg.setBody("Parabéns, seu cadastro foi salvo com sucesso!");
+		msg.setBody("Parabéns, seu cadastro de cliente foi salvo com sucesso!");
 		
 		rabbitMQSender.send(msg);
 
