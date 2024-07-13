@@ -9,7 +9,9 @@
 
 # Aplicação
 
-1. locacaobike 
+## 1. locacaobike 
+
+![Imagem Locadora]([URL_da_Imagem](https://github.com/Notargg/DevOps_D/blob/main/images/Locadora.png?raw=true))
 
 A aplicação resume em uma aplicação Web de Locação de Bicicletas, onde é possível criar e agendar locações.
 - Cliente ( Admins ) conseguem gerenciar Clientes / Locadoras e Locações.
@@ -23,7 +25,7 @@ Contudo foi adaptada para conseguir ser feita em Container.
 - Além disso, após salvar quaisquer resultados, ele irá enviar uma mensagem para Cliente / Locadora para confirmar a alteração. ( Producer )
 
 
-2. db
+## 2. db
 
 O nosso db está usando uma imagem docker que está hospedada na porta 3306.
 - Temos os Clientes Pietro e Rafa.
@@ -31,16 +33,27 @@ O nosso db está usando uma imagem docker que está hospedada na porta 3306.
 - Usuário Admin.
 - Locações de Pietro e Conserta Bike RP em dois dias e horários diferentes.
 
-3. rabbit
+## 3. rabbit
 
 O rabbit é o responsável por gerenciar essa troca de mensagens, principalmente pela condição de querrys
 
-4. subscriber
+## 4. subscriber
 
 será responsável para consumir as mensagens enviadas pela aplicação durante essas operações de salvamento.
 
 # Como subir ?
 
+## Observações
+
+- É preciso ter instalado o maven e o docker na máquina para poder rodar
+- O maven pode ser instalado com
+  
+```
+sudo apt install mvn
+```
+- Mas o docker é preciso seguir algum tutorial: https://aurimrv.gitbook.io/pratica-devops-com-docker
+
+## Processo para subir: docker compose
 
 - Primeiramente é preciso entrar na pasta de locacaobike e fazer o build
 
