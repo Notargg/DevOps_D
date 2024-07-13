@@ -11,8 +11,6 @@
 
 ## 1. locacaobike 
 
-![Imagem Locadora]([URL_da_Imagem](https://github.com/Notargg/DevOps_D/blob/main/images/Locadora.png?raw=true))
-
 A aplicação resume em uma aplicação Web de Locação de Bicicletas, onde é possível criar e agendar locações.
 - Cliente ( Admins ) conseguem gerenciar Clientes / Locadoras e Locações.
 - Clientes ( Cliente ) consegue fazer novas Locações em Locadoras, além de gerencia=las.
@@ -66,18 +64,15 @@ cd ..
 - Com isso finalizado, entrar em subscriber e fazer o build
 
 ```
-
 cd subscriber
 mvn clean package
 cd ..
-
 ```
 
 - Para finalizar, apenas
 
 ```
 docker compose up
-
 ```
 
 
