@@ -69,7 +69,7 @@ public class ClienteController {
 
 		Message msg = new Message();
 		msg.setToName(cliente.getNome());
-		msg.setToAddress("ggraton7@gmail.com");
+		msg.setToAddress(cliente.getEmail());
 		msg.setFromName("Virtual Lease");
 		msg.setFromAddress("deswebteste@gmail.com");
 		msg.setSubject("Salvamento com sucesso!");
