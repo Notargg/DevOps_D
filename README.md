@@ -43,6 +43,12 @@ O RabbitMQ é um message broker, onde será o principal em gerenciar a troca de 
 - Apenas o Backend / Subscriber sabem.
 - Caso queira saber como está a troca de mensagem, deixe exposta 15672.
 
+```
+ports:
+    - "15672:15672"
+
+```
+
 ## 4. subscriber
 
 ![image](https://github.com/user-attachments/assets/815b49df-944c-4c70-8278-70fac3c81859) 
@@ -81,7 +87,8 @@ mvn clean package
 cd ..
 ```
 
-- Para finalizar, apenas
+- Para finalizar, dê o comando:
+- OBS: Caso não suba de primeira, Ctrl + C para parar e dê novamente o comando ( DB engana... )
 
 ```
 docker compose up

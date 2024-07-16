@@ -15,8 +15,6 @@ services:
     container_name: rabbitmq
     networks:
       - email
-    ports:
-      - "15672:15672"
 
   backend:
     image: locacaobike
