@@ -17,7 +17,7 @@ services:
       - email
 
   backend:
-    image: locacaobike
+    image: notargg/locacaobike
     restart: always
     container_name: locacaobike
     env_file:
@@ -32,7 +32,7 @@ services:
       - rabbitmq
 
   subscriber:
-    build: ./subscriber
+    image: notargg/subscriber
     restart: always
     container_name: subscriber
     env_file:
