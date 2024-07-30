@@ -69,9 +69,9 @@ sudo apt install mvn
 ```
 - Mas o docker é preciso seguir algum tutorial: https://aurimrv.gitbook.io/pratica-devops-com-docker
 
-## Processo para subir: docker compose
+## Processo para buildar o projeto ( não irá subir )
 
-- Primeiramente é preciso entrar na pasta de locacaobike e fazer o build
+- Build locacaobike
 
 ```
 cd locacaobike
@@ -79,7 +79,7 @@ mvn clean package
 cd ..
 ```
 
-- Com isso finalizado, entrar em subscriber e fazer o build
+- Build subscriber
 
 ```
 cd subscriber
@@ -87,7 +87,9 @@ mvn clean package
 cd ..
 ```
 
-- Para finalizar, dê o comando:
+## Como usar a aplicação
+
+- Dê o comando:
 - OBS: Caso não suba de primeira, Ctrl + C para parar e dê novamente o comando ( DB engana... )
 
 ```
