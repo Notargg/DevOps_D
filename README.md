@@ -69,23 +69,10 @@ sudo apt install mvn
 ```
 - Mas o docker é preciso seguir algum tutorial: https://aurimrv.gitbook.io/pratica-devops-com-docker
 
-## Processo para buildar o projeto ( não irá subir )
+## Processo para buildar o projeto - Caso alteração
 
-- Build locacaobike
-
-```
-cd locacaobike
-mvn clean package
-cd ..
-```
-
-- Build subscriber
-
-```
-cd subscriber
-mvn clean package
-cd ..
-```
+- Caso o Dev deseje subir as novas alterações para o DockerHub, é possível utilizar o próprio GitHub Actions.
+- Suba o commit para a Main, dessa forma será possível executar manualmente o workflow para buildar e subir.
 
 ## Como usar a aplicação
 
