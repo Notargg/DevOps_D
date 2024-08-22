@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: locacaobike
+  labels:
+    app: locacaobike
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: locacaobike
+  template:
+    metadata:
+      labels:
+        app: locacaobike
+    spec:
+      containers:
+        - name: locacaobike
+          image: notargg/locacaobike:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: MYSQL_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: locacaobike-db-configmap
+                  key: database_url
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: locacaobike-db-secret
+                  key: username
+            - name: MYSQL_PASSWORD 
+              valueFrom:
+                secretKeyRef:
+                  name: locacaobike-db-secret
+                  key: password
+            - name: RABBITMQ_EXCHANGE
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbitmq-config
+                  key: RABBITMQ_EXCHANGE
+            - name: RABBITMQ_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbitmq-config
+                  key: RABBITMQ_QUEUE
+            - name: RABBITMQ_ROUTINGKEY
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbitmq-config
+                  key: RABBITMQ_ROUTINGKEY
+            - name: RABBITMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbitmq-config
+                  key: RABBITMQ_HOST
+            - name: RABBITMQ_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbitmq-config
+                  key: RABBITMQ_PORT

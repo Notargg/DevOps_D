@@ -1,0 +1,6 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: locacaobike-db-configmap
+data:
+  database_url: jdbc:mysql://locacaobike-db:3306/LocacaoBike?createDatabaseIfNotExist=true

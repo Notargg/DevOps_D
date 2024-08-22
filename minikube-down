@@ -1,0 +1,64 @@
+#!/bin/bash
+
+################################################
+# Removendo a configuração do Ingress
+################################################
+
+cd T2
+
+kubectl delete -f ingress.yaml
+
+cd ..
+
+################################################
+# Removendo a configuração do locacaoBike
+################################################
+
+cd T2/locacaobike
+
+kubectl delete -f deployment.yaml; 
+kubectl delete -f service.yaml; 
+kubectl delete -f configmap.yaml;
+
+cd ../..
+
+################################################
+# Removendo a configuração do subscriber
+################################################
+
+cd T2/subscriber
+
+kubectl delete -f deployment.yaml; 
+kubectl delete -f service.yaml;
+kubectl delete -f configmap.yaml;
+kubectl delete -f secret.yaml;
+
+cd ../..
+
+################################################
+# Removendo a configuração do K8s (DB)
+################################################
+
+cd T2/db
+
+kubectl delete -f deployment.yaml; 
+kubectl delete -f service.yaml; 
+kubectl delete -f configmap.yaml; 
+kubectl delete -f secret.yaml;  
+kubectl delete -f pvc.yaml; 
+kubectl delete pv contatos-pv-volume
+
+cd ../..
+
+################################################
+# Removendo a configuração do rabbitmq
+################################################
+
+cd T2/rabbitmq
+
+kubectl delete -f statefulset.yaml; 
+kubectl delete -f service.yaml;
+kubectl delete -f configmap.yaml;
+kubectl delete -f secret.yaml;
+
+cd ../..

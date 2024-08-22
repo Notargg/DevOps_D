@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: locacaobike-db
+  labels:
+    run: locacaobike-db
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+      protocol: TCP
+  selector:
+    app: locacaobike-db

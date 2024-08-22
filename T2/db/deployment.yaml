@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: locacaobike-db
+  labels:
+    app: locacaobike-db
+spec:
+  #replicas: 1
+  selector:
+    matchLabels:
+      app: locacaobike-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: locacaobike-db
+    spec:
+      containers:
+      - name: locacaobike-db
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        env:
+          - name: MYSQL_ROOT_PASSWORD 
+            valueFrom:
+              secretKeyRef:
+                name: locacaobike-db-secret
+                key: password

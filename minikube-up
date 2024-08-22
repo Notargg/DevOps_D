@@ -1,0 +1,128 @@
+#!/bin/bash
+
+load_locacaobike_image() {
+    
+    ################################################
+    # Pegando a imagem docker do locacaobike
+    ################################################
+    
+    minikube image load notargg/locacaobike
+}
+
+load_subscriber_image() {
+    
+    ################################################
+    # Pegando a imagem docker do subscriber
+    ################################################
+
+    minikube image load notargg/subscriber
+}
+
+load_mysql_image() {
+    minikube image load mysql:5.7
+}
+
+load_rabbitmq_image() {
+    minikube image load rabbitmq:3-management
+}
+
+################################################
+# Inicializando o Minikube
+################################################
+
+minikube start --cpus 4 --memory 4096
+
+################################################
+# Habilitando o Ingress
+################################################
+
+minikube image load k8s.gcr.io/ingress-nginx/controller:v1.9.4
+
+minikube addons enable ingress
+
+################################################
+# Inicializando o DashBoard
+################################################
+
+minikube addons enable dashboard
+
+minikube addons enable metrics-server
+
+minikube dashboard &
+
+################################################
+# Verificando flag -b
+################################################
+
+while getopts ":b" option; do
+   case $option in
+      b) # build images
+         load_locacaobike_image
+         load_subscriber_image
+         load_mysql_image
+         load_rabbitmq_image
+   esac
+done
+
+################################################
+# Configurando o K8s (DB)
+################################################
+
+cd T2/db
+
+kubectl apply -f secret.yaml; 
+kubectl create -f pv.yaml; kubectl create -f pvc.yaml;
+
+kubectl apply -f deployment.yaml; kubectl apply -f service.yaml; kubectl apply -f configmap.yaml; 
+
+cd ../..
+
+################################################
+# Configurando o locacaobike
+################################################
+
+cd T2/locacaobike
+
+kubectl wait --for=jsonpath='{.status.phase}'=Running $(kubectl get pods -o=name)
+
+kubectl apply -f configmap.yaml;
+kubectl apply -f deployment.yaml; 
+kubectl apply -f service.yaml;
+
+cd ../..
+
+################################################
+# Configurando o subscriber
+################################################
+
+cd T2/subscriber
+
+
+kubectl apply -f configmap.yaml;
+kubectl apply -f deployment.yaml; 
+kubectl apply -f service.yaml;
+kubectl apply -f secret.yaml; 
+
+cd ../..
+
+################################################
+# Configurando o rabbitmq
+################################################
+
+cd T2/rabbitmq
+
+
+kubectl apply -f configmap.yaml;
+kubectl apply -f statefulset.yaml; 
+kubectl apply -f service.yaml;
+kubectl apply -f secret.yaml; 
+
+cd ../..
+
+################################################
+# Configurando o Ingress
+################################################
+
+cd T2
+
+kubectl apply -f ingress.yaml
