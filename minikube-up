@@ -126,3 +126,4 @@ cd ../..
 cd T2
 
 kubectl apply -f ingress.yaml
+kubectl apply -f service.yaml

@@ -55,7 +55,10 @@ spec:
                   name: rabbitmq-secret
                   key: rabbitmq-password
             - name: SPRING_MAIL_HOST
-              value: "smtp.gmail.com"
+              valueFrom:
+                secretKeyRef:
+                  name: email-secret
+                  key: spring.mail.host
             - name: SPRING_MAIL_PORT
               value: "465"
             - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH

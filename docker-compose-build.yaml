@@ -1,0 +1,50 @@
+services:
+  
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend
+  
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    container_name: rabbitmq
+    networks:
+      - email
+
+  backend:
+    build: ./locacaobike
+    restart: always
+    container_name: locacaobike
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+    networks:
+      - backend
+      - email
+    depends_on:
+      - db
+      - rabbitmq
+
+  subscriber:
+    build: ./subscriber
+    restart: always
+    container_name: subscriber
+    env_file:
+      - .env
+      - ./subscriber/.env
+    networks:
+      - email
+    depends_on:
+      - backend
+
+networks: 
+  backend:
+  email:
+volumes:
+  mysql-data:

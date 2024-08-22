@@ -1,0 +1,27 @@
+#!/bin/bash
+
+################################################
+# Fazendo a build do Subscriber
+################################################
+
+cd subscriber
+
+mvn clean package
+
+cd ..
+
+################################################
+# Fazendo a build do locacaoBike
+################################################
+
+cd locacaobike
+
+mvn clean package
+
+cd ..
+
+################################################
+# Subir o docker compose build
+################################################
+
+docker compose -f docker-compose-build.yaml up
