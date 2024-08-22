@@ -47,6 +47,7 @@ import br.ufscar.dc.dsw.security.UsuarioDetailsServiceImpl;
    			.authorizeRequests()
    				.antMatchers("/", "/index", "/error").permitAll()
 				.antMatchers("/publisher/publish").permitAll()
+				.antMatchers("http://t2.k8s.local/").permitAll()
    				.antMatchers("/login/**", "/js/**").permitAll()
                    .antMatchers("/css/**", "/image/**", "/webjars/**", "/locadoras/listar").permitAll()
                 .antMatchers("/locacoes/cadastrar").hasAnyRole("Cliente", "Admin")
