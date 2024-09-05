@@ -54,7 +54,7 @@ spec:
                 secretKeyRef:
                   name: rabbitmq-secret
                   key: rabbitmq-password
-            - name: SPRING_MAIL_HOST
+            - name: HOST
               valueFrom:
                 secretKeyRef:
                   name: email-secret
@@ -65,12 +65,12 @@ spec:
               value: "true"
             - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE
               value: "true"
-            - name: SPRING_MAIL_USERNAME
+            - name: USERNAME
               valueFrom:
                 secretKeyRef:
                   name: email-secret
                   key: spring.mail.username
-            - name: SPRING_MAIL_PASSWORD
+            - name: PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: email-secret
