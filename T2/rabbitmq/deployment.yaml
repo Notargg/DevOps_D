@@ -21,12 +21,12 @@ spec:
             - name: RABBITMQ_DEFAULT_USER
               valueFrom:
                 secretKeyRef:
-                  name: rabbitmq-secret
+                  name: notargg-secret
                   key: rabbitmq-username
             - name: RABBITMQ_DEFAULT_PASS
               valueFrom:
                 secretKeyRef:
-                  name: rabbitmq-secret
+                  name: notargg-secret
                   key: rabbitmq-password
           ports:
             - containerPort: 5672

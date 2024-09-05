@@ -47,17 +47,17 @@ spec:
             - name: RABBITMQ_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: rabbitmq-secret
+                  name: notargg-secret
                   key: rabbitmq-username
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: rabbitmq-secret
+                  name: notargg-secret
                   key: rabbitmq-password
             - name: HOST
               valueFrom:
                 secretKeyRef:
-                  name: email-secret
+                  name: notargg-secret
                   key: spring.mail.host
             - name: SPRING_MAIL_PORT
               value: "465"
@@ -68,10 +68,10 @@ spec:
             - name: USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: email-secret
+                  name: notargg-secret
                   key: spring.mail.username
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: email-secret
+                  name: notargg-secret
                   key: spring.mail.password
