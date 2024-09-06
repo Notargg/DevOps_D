@@ -1,5 +1,6 @@
 # DevOps_D
- - Esse Repositório foi feito para a matéria de DevOps no período 2024/1. Ofertada na UFScar ( Universidade Federal de São Carlos ) pelo Professor Delano.
+
+<p> Esse Repositório foi feito para a matéria de DevOps no período 2024/1. Ofertada na UFScar ( Universidade Federal de São Carlos ) pelo Professor Delano. </p> 
 
  
 # Integrantes
@@ -57,9 +58,13 @@ O subscriber é responsável por consumir as mensagens que são mandadas pelo no
 - Ele fica esperando a fila do Rabbit.
 - Ao chegar mensagem ele consegue consumi-las e enviar para o email designado.
 
-# Como subir ?
+# Trabalho
 
-## Observações
+
+
+## T1
+
+### Observações
 
 - É preciso ter instalado o maven e o docker na máquina para poder rodar
 - O maven pode ser instalado com
@@ -69,20 +74,88 @@ sudo apt install mvn
 ```
 - Mas o docker é preciso seguir algum tutorial: https://aurimrv.gitbook.io/pratica-devops-com-docker
 
-## Processo para buildar o projeto - Caso alteração
+### Primeira Forma - Docker Compose Up - Build
 
-- Caso o Dev deseje subir as novas alterações para o DockerHub, é possível utilizar o próprio GitHub Actions.
-- Suba o commit para a Main, dessa forma será possível executar manualmente o workflow para buildar e subir.
+- Primeiro é preciso buildar as imagens que serão usadas. Para isso use:
+- A aplicação estará em http://localhost:80
 
-## Como usar a aplicação
+```
+./build-image
+```
+- Agora para descer as imagens do Docker, use:
+- Caso queira remover as imagens use -r junto com o comando.
+```
+./compose-build-down 
+```
+### Segunda Forma - Docker Compose Up - Image
 
-- Dê o comando:
-- OBS: Caso não suba de primeira, Ctrl + C para parar e dê novamente o comando ( DB engana... )
-
+- Para subir a imagem é para usar:
+- A aplicação estará em localhost:80
+  
 ```
 docker compose up
 ```
 
+- Agora para descer as imagens do Docker, use:
+- Caso queira remover as imagens use -r junto com o comando.
+
+```
+./compose-down 
+```
+## T2
+
+### Observações
+
+- É preciso ter instalado o minikube instalado.
+- Só seguir o tutorial: https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download
+- Além disso, é preciso fazer uma configuração inicial:
+  
+```
+minikube start
+```
+- Após esse processo use, ele irá te retornar um IP
+
+```
+minikube ip
+```
+- Agora acesse o o diretorio /etc/hosts e coloque esse ip com a seguinte configuração
+- Colocando o seguinte: {IP_MINIKUBE}      t2.k8s.local
+```
+sudo /etc/hosts
+```
+
+### Kubectl
+
+- Para subir a imagem é para usar:
+
+```
+./minikube-up
+```
+
+- Agora para descer as imagens do minikube use:
+
+```
+./minikube-down
+```
+
+# Final
+
+- Lembre sempre de verificar suas imagens, tanto no docker quanto no minikube
+## Docker
+
+ ```
+docker image ls
+```
+## Minikube
+
+ ```
+minikube ssh
+```
+- Depois de entrar, mesmo comando.
+
+ ```
+docker image ls
+```
 
 
 
