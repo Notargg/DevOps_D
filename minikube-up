@@ -114,7 +114,7 @@ cd ../..
 
 cd T2/rabbitmq
 
-kubectl create -f pv.yaml; kubectl create -f pvc.yaml;
+# kubectl create -f pv.yaml; kubectl create -f pvc.yaml;
 kubectl apply -f deployment.yaml; 
 kubectl apply -f service.yaml;
 

@@ -104,6 +104,8 @@ docker compose up
 ```
 ## T2
 
+- Na pasta há outro README com as informações de cada artefato do Kubernet.
+
 ### Observações
 
 - É preciso ter instalado o minikube instalado.
