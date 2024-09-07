@@ -90,7 +90,7 @@ sudo apt install mvn
 ### Segunda Forma - Docker Compose Up - Image
 
 - Para subir a imagem é para usar:
-- A aplicação estará em localhost:80
+- A aplicação estará em http://localhost:80
   
 ```
 docker compose up
@@ -119,7 +119,7 @@ minikube start
 minikube ip
 ```
 - Agora acesse o o diretorio /etc/hosts e coloque esse ip com a seguinte configuração
-- Colocando o seguinte: {IP_MINIKUBE}      t2.k8s.local
+- Colocando o seguinte: {IP_MINIKUBE}      k8s.local
 ```
 sudo /etc/hosts
 ```
