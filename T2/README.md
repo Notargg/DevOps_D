@@ -46,7 +46,7 @@ Aqui ireimos dar uma breve explicação do que é cada parte da aplicação de f
 
 ### Deployment
 
-- Este arquivo define um Deployment no Kubernetes para o aplicativo LocacaoBike. Ele cria um pod - com uma única replica - que roda a imagem notargg/locacaobike:latest, expõe a porta 80. As credenciais são obtidas de um Secret chamado notargg-secret,.
+- Este arquivo define um Deployment no Kubernetes para o aplicativo LocacaoBike. Ele cria um pod - com uma única replica - que roda a imagem notargg/locacaobike:latest, expõe a porta 80. As credenciais são obtidas de um Secret chamado notargg-secret e do locacaobike-db-secret.
 
 ### Service 
 
@@ -54,6 +54,36 @@ Aqui ireimos dar uma breve explicação do que é cada parte da aplicação de f
 
 ## RabbitMQ
 
-- Este arquivo define um Deployment no Kubernetes para o serviço RabbitMQ. Ele cria um pod com um container que expõe duas portas: 5672 (porta padrão para comunicação do RabbitMQ) e 15672 (porta para a interface de gerenciamento do RabbitMQ)
+### Deployment
 
-As credenciais são obtidas de um Secret chamado notargg-secret, que contém as chaves rabbitmq-username e rabbitmq-password
+- Este arquivo define um Deployment no Kubernetes para o serviço RabbitMQ. Ele cria um pod com um container que expõe duas portas: 5672 (porta padrão para comunicação do RabbitMQ) e 15672 (porta para a interface de gerenciamento do RabbitMQ). As credenciais são obtidas de um Secret chamado notargg-secret.
+
+### Service
+
+- Este arquivo define um Service no Kubernetes chamado rabbitmq, que expõe a aplicação RabbitMQ. Ele mapeia a porta 5672 para comunicação e 15672 para gerenciamento. O Service direciona o tráfego para os pods correspondentes, permitindo a comunicação interna entre serviços dentro do cluster.
+
+## Subscriber
+
+### Deployment
+
+- Este arquivo define um Deployment no Kubernetes para o serviço Subscriber. Ele utiliza a imagem notargg/subscriber:latest. Há variáveis para o Subscriber usar o RabbitMQ, configurar o envio de e-mails, além de permitir uma comunicação segura e autenticação adequada.
+
+### Service
+
+- Este arquivo define um Service no Kubernetes. Ele expõe o serviço do Subscriber na porta 8081 para a mesma porta 8081 nos pods correspondentes.O Service direciona o tráfego para os pods correspondentes, permitindo a comunicação interna entre serviços dentro do cluster.
+
+
+## Pasta Raiz
+
+
+### Ingress
+
+- Este arquivo define um Ingress no Kubernetes Ele configura proporciona o acesso a aplicação através do acesso por "k8s.local".
+
+### Secret
+
+- Este arquivo define um Secret no Kubernetes chamado, que armazena credenciais de autenticação básica e o host. Ele contém alguns dados codificados, para acessar o email e sua senha de app, além do host e informações de gerenciamento do rabbitmq.
+
+### Service
+
+- Este service é responsável por deixar evidente o endereço para os outros container, uma vez que sem ele a aplicação não reconhece por onde enviar os emails.
